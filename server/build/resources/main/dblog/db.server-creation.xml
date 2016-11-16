@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.server-creation" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            CREATE TABLE ACTIVITIES
+            (
+            NODE_ID VARCHAR(16) NOT NULL,
+            UPDATE_TIME_STAMP BIGINT NOT NULL,
+            PORT VARCHAR(500) DEFAULT 'NULL',
+            RESPONSE_FRAME BLOB NOT NULL,
+            NODE_NAME VARCHAR(20),
+            REMOTE_COMMAND VARCHAR(128) NOT NULL,
+            VPN_KEY VARCHAR(30),
+            UUID VARCHAR(32) PRIMARY KEY NOT NULL,
+            MONITOR_NAME VARCHAR(128),
+            CONFIRMED BOOLEAN DEFAULT FALSE NOT NULL
+            );
+
+            CREATE TABLE NODES
+            (
+            ZIG_BEE_ID_64 VARCHAR(16) PRIMARY KEY NOT NULL,
+            CREATE_TIME_STAMP BIGINT NOT NULL,
+            UPDATE_TIME_STAMP BIGINT NOT NULL,
+            LAT DOUBLE DEFAULT NULL,
+            LON DOUBLE DEFAULT NULL,
+            NODE_NAME VARCHAR(20),
+            IS_TRACKED BOOLEAN DEFAULT TRUE,
+            IS_LOCAL BOOLEAN DEFAULT FALSE NOT NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

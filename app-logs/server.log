@@ -1,0 +1,3 @@
+08.11.16 10:10:52.218 [main] INFO  / - Initializing Spring root WebApplicationContext
+08.11.16 10:10:56.913 [main] WARN  o.h.e.j.i.JdbcServicesImpl - HHH000342: Could not obtain connection to query metadata : Соединение разорвано: "java.net.ConnectException: Connection refused: connect: localhost:9092"
+Connection is broken: "java.net.ConnectException: Connection refused: connect: localhost:9092" [90067-185]

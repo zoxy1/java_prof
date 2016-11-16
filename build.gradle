@@ -1,0 +1,166 @@
+subprojects {
+    apply plugin: 'java'
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    sourceCompatibility = 1.7
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url 'http://repo.springsource.org/libs-milestone'
+        }
+    }
+
+    ext {
+        springVersion = "3.2.3.RELEASE";
+        springDataJpaVersion = "1.4.0.RELEASE"
+        hibernateVersion = "4.2.2.Final"
+        hibernateJpaVersion = "1.0.0.Final"
+        jettyVersion = "8.1.14.v20131031"
+        jacksonVersion = '2.3.0'
+        validationVersion = '1.1.0.Final'
+        commonsLang3Version = '3.1'
+        commonsCollectionsVersion = '3.2.1'
+        junitVersion = '4.11'
+        slf4jVersion = '1.7.5'
+        logbackVersion = '1.0.13'
+    }
+
+    test {
+        useJUnit()
+    }
+
+    sourceSets {
+        main {
+            java {
+                  srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/resources'
+                srcDir 'src/main/java'
+            }
+        }
+    }
+}
+
+project(':common') {
+    dependencies {
+
+        compile "org.apache.commons:commons-lang3:$commonsLang3Version"
+        compile 'org.slf4j:slf4j-api:1.7.2'
+        compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:$hibernateJpaVersion"
+        
+    }
+}
+
+project(':server') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    dependencies {
+        
+        compile project(':common')
+        // https://mvnrepository.com/artifact/org.apache.wicket/wicket-core
+        compile group: 'org.apache.wicket', name: 'wicket-core', version: '6.20.0'
+        compile 'org.apache.wicket:wicket-auth-roles:6.20.0'
+        compile 'org.apache.wicket:wicket-spring:6.20.0'
+        compile 'org.apache.wicket:wicket-extensions:6.20.0'
+        // https://mvnrepository.com/artifact/org.springframework/spring-web
+        compile group: 'org.springframework', name: 'spring-web', version: "$springVersion"
+        compile "org.springframework.security:spring-security-web:$springVersion"
+        compile "org.springframework.security:spring-security-config:$springVersion"
+        compile 'org.slf4j:slf4j-api:1.7.2'
+
+        compile "org.springframework:spring-orm:$springVersion"
+        compile "org.springframework.data:spring-data-jpa:$springDataJpaVersion"
+        compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:$hibernateJpaVersion"
+        compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+        compile 'com.h2database:h2:1.4.185'
+        compile 'org.liquibase:liquibase-core:3.0.7'
+        compile 'com.google.guava:guava:15.0'
+
+        providedCompile "org.eclipse.jetty:jetty-server:$jettyVersion"
+        providedCompile "org.eclipse.jetty:jetty-webapp:$jettyVersion"
+
+
+        testCompile "junit:junit:$junitVersion"
+        testCompile "org.springframework:spring-test:$springVersion"
+
+        runtime group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+
+    }
+
+    task explodedWar(type: Copy, dependsOn: 'war') {
+        into new File("$buildDir", 'exploded-war')
+        with war
+    }
+
+    task(start, dependsOn: 'explodedWar', type: JavaExec) {
+        main = 'Start'
+        systemProperty 'server.port', '8080'
+        classpath = sourceSets.test.runtimeClasspath
+    }
+
+    task(startDebug, dependsOn: 'explodedWar', type: JavaExec) {
+        main = 'Start'
+        classpath = sourceSets.test.runtimeClasspath
+        systemProperty 'server.port', '8080'
+        jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"]
+    }
+
+    jettyRunWar.contextPath = ''
+}
+
+
+apply plugin: 'gradle-one-jar'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.3'
+    }
+}
+
+project(':tracker') {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    dependencies {
+
+        compile project(':common')
+
+    }
+
+    task daemonJar(type: OneJar) {
+        mainClass = 'ru.metacon.monitor.Application'
+    }
+
+    artifacts {
+        archives daemonJar
+    }
+}
+
+project(':billing') {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    dependencies {
+
+        compile 'com.h2database:h2:1.4.185'
+        compile project(':common')
+
+        testCompile "junit:junit:$junitVersion"
+
+    }
+
+    task daemonJar(type: OneJar) {
+        mainClass = 'ru.metacon.monitor.Application'
+    }
+
+    artifacts {
+        archives daemonJar
+    }
+}
+

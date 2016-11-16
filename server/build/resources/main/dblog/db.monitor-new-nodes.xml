@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.monitor-new-nodes" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B0F5', 1466431769329, 1466431769329, 'B0F5');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B0F8', 1466431769329, 1466431769329, 'B0F8');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B0FC', 1466431769329, 1466431769329, 'B0FC');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B0EB', 1466431769329, 1466431769329, 'B0EB');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B0ED', 1466431769329, 1466431769329, 'B0ED');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B101', 1466431769329, 1466431769329, 'B101');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B105', 1466431769329, 1466431769329, 'B105');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B106', 1466431769329, 1466431769329, 'B106');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B107', 1466431769329, 1466431769329, 'B107');
+            insert into nodes (ZIG_BEE_ID_64, CREATE_TIME_STAMP, UPDATE_TIME_STAMP, NODE_NAME) values ('0013A20040F9B10B', 1466431769329, 1466431769329, 'B10B');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

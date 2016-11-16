@@ -1,0 +1,88 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Wicket Examples - forminput</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<wicket:panel>
+    <form wicket:id="inputForm" class="inputForm">
+        <fieldset>
+            <!--<legend>
+                <wicket:message key="input"/>
+            </legend>-->
+            <table  class="dataview">
+
+                <tr valign="top">
+                    <th><label for="store">
+                        <wicket:message key="store_address"/>
+                    </label></th>
+                    <td>
+                        <input wicket:id="store_name" id="store" type="text" size="50" disabled="false"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="address">
+                        <wicket:message key="store_name"/>
+                        </label>
+                    </th>
+                    <td>
+                        <input wicket:id="store_address" id="address" type="text" size="50"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label>
+                        <wicket:message key="store_coords"/>
+                    </label></th>
+                    <td colspan="2">
+                        <label for="latitude">
+                            <wicket:message key="store_lat"/>
+                        </label>
+                        <input wicket:id="store_lat" id="latitude" type="text" size="50" />
+                        <br/>
+                        <label for="longitude">
+                            <wicket:message key="store_lon"/>
+                        </label>
+                        <input wicket:id="store_lon" id="longitude" type="text" size="50" />
+                    </td>
+                </tr>
+
+                <!--<tr>
+                    <th><label>
+                        <wicket:message key="store_balance"/>
+                    </label></th>
+                    <td colspan="2">
+                        <label for="income">
+                            <wicket:message key="store_income"/>
+                        </label>
+                        <input wicket:id="store_income" id="income" type="text" size="50"/>
+                        <br/>
+                        <label for="outcome">
+                            <wicket:message key="store_outcome"/>
+                        </label>
+                        <input wicket:id="store_outcome" id="outcome" type="text" size="50"/>
+                        <br/>
+                        <label for="balance">
+                            <wicket:message key="store_balance"/>
+                        </label>
+                        <input wicket:id="store_balance" id="balance" type="text" size="50"/>
+                    </td>
+                </tr>-->
+
+                <tr>
+                    <th>
+                        <label>
+                            <wicket:message key="actions"/>
+                        </label>
+                    </th>
+                    <td colspan="2">
+                        <input type="submit" wicket:id="updateButton" wicket:message="value:update"/>
+                        <input type="submit" wicket:id="cancelButton" wicket:message="value:exit"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</wicket:panel>
+</body>
+</html>

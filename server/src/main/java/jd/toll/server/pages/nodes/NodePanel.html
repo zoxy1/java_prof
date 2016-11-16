@@ -1,0 +1,28 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Wicket Examples - forminput</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<wicket:panel>
+    <table cellspacing="0" class="dataview">
+        <tr>
+            <!--<th>Действия</th>-->
+            <th>ZigBee ID</th>
+            <th>Описание</th>
+            <th>Координаты</th>
+            <th></th>
+        </tr>
+        <tr wicket:id="sorting">
+            <!--<td><span wicket:id="actions">[actions]</span></td>-->
+
+            <!--<a href="#" wicket:id="link"><span wicket:id="name"></span></a>-->
+            <td><a href="#" wicket:id="name"><span wicket:id="text"></span></a> </td>
+            <td><span wicket:id="address">[nodeId]</span> </td>
+            <td><span wicket:id="coords">[date]</span></td>
+            <td><a href="#" wicket:id="delete"> <wicket:message key="store_delete"/></a> </td>
+        </tr>
+    </table>
+</wicket:panel>
+</body>
+</html>
